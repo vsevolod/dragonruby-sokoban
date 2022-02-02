@@ -1,0 +1,2 @@
+class Sokoban < GameTemplate
+end

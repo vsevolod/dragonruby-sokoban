@@ -1,0 +1,5 @@
+require 'app/screen.rb'
+require 'app/game_config.rb'
+require 'app/game_template.rb'
+require 'app/sokoban.rb'
+require 'app/tick.rb'
