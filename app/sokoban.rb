@@ -1,5 +1,5 @@
 class Sokoban < GameTemplate
-  ATTRIBUTES = %i[map]
+  ATTRIBUTES = %i[map level]
 
   attr_reader :hero, :boxes, :goals
   attr_accessor :finished
