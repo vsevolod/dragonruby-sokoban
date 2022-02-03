@@ -1,9 +1,11 @@
 class GameTemplate
-  attr_reader :screen
   attr_reader :config
 
-  def initialize(screen)
-    @screen = screen
-    @config = GameConfig.new(&block)
+  def initialize(&block)
+    @config = GameConfig.new(self.class.const_get(:ATTRIBUTES), &block)
+  end
+
+  def init_draw(screen)
+    raise NotImplementedError
   end
 end

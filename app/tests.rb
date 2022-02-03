@@ -23,11 +23,6 @@ def test_universe args, assert
   puts "test_universe completed successfully"
 end
 
-def test_game_template args, assert
-  screen = Screen.new(args)
-  game = GameTemplate.new(screen: screen)
-end
-
 puts "running tests"
 $gtk.reset 100
 $gtk.log_level = :off

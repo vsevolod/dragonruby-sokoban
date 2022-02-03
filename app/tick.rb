@@ -1,11 +1,22 @@
 def tick args
-  screen = Screen.new(args)
-  screen.show_fps
+  init(args)
 
-  game = Sokoban.new(screen: screen) do |c|
-    c.width = 10
-    c.height = 20
+  @screen.tick(args)
+  @screen.show_fps
+
+  Sokoban::Events::TickDraw.new(screen: @screen, game: @game).call
+end
+
+def init(args)
+  return if @initial
+
+  @map = Sokoban::Map.new(File.read('./mygame/data/map1.txt'))
+  @screen = Screen.new(map: @map, args: args)
+  @game = Sokoban.new do |c|
+    c.map = @map
   end
 
-  game.draw_field
+  Sokoban::Events::InitDraw.new(screen: @screen, game: @game).call
+
+  @initial = true
 end
