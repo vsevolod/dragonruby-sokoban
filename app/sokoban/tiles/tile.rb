@@ -3,9 +3,14 @@ class Sokoban
     class Tile
       STATES = %i[empty wall]
       attr_reader :state
+      attr_accessor :box, :goal
 
-      def initialize(state)
+      def initialize(state, box: nil, goal: nil)
         @state = state
+        @box = box
+        box.tile = self if box
+
+        @goal = goal
       end
 
       def draw(screen, **position)

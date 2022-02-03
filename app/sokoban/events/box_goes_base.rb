@@ -1,18 +1,20 @@
 class Sokoban
   module Events
-    class HeroGoesBase
-      attr_reader :game
+    class BoxGoesBase
+      attr_reader :game, :box
 
-      def initialize(game:)
+      def initialize(game:, box:)
         @game = game
+        @box = box
       end
 
       def call
         return false unless available?
 
-        game.hero.x = next_x
-        game.hero.y = next_y
-        puts "#{game.hero.x}:#{game.hero.y}"
+        box.x = next_x
+        box.y = next_y
+        box.tile = next_tile
+
         true
       end
 
@@ -23,27 +25,19 @@ class Sokoban
         return false if next_y < 1
         return false unless next_tile
 
-        if next_tile.box
-          next_tile.state == :empty && box_event.new(game: game, box: next_tile.box).call
-        else
-          next_tile.state == :empty
-        end
+        next_tile.box.nil? && next_tile.state == :empty
       end
 
       def next_x
-        game.hero.x
+        box.x
       end
 
       def next_y
-        game.hero.y
+        box.y
       end
 
       def next_tile
         @next_tile ||= game.map.tiles[next_y - 1][next_x - 1]
-      end
-
-      def box_event
-        raise NotImplementedError
       end
     end
   end

@@ -32,26 +32,31 @@ class Sokoban
           x = line.size + 1
           y = @tiles.size
 
-          state =
+          tile =
             case sym
             when '*'
-              :wall
+              Tiles::Tile.new(:wall)
             when 'h'
               @hero = Tiles::Hero.new(x: x, y: y)
-              :empty
+
+              Tiles::Tile.new(:empty)
             when 'b'
-              @boxes.push(Tiles::Box.new(x: x, y: y))
-              :empty
+              box = Tiles::Box.new(x: x, y: y)
+              @boxes.push(box)
+
+              Tiles::Tile.new(:empty, box: box)
             when 'g'
-              @goals.push(Tiles::Goal.new(x: x, y: y))
-              :empty
+              goal = Tiles::Goal.new(x: x, y: y)
+              @goals.push(goal)
+
+              Tiles::Tile.new(:empty, goal: goal)
             when "\n"
               next
             else
-              :empty
+              Tiles::Tile.new(:empty)
             end
 
-          line.push(Tiles::Tile.new(state))
+          line.push(tile)
         end
       end
     end

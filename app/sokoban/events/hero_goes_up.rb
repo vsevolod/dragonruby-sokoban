@@ -6,6 +6,10 @@ class Sokoban
       def next_y
         game.hero.y - 1
       end
+
+      def box_event
+        Sokoban::Events::BoxGoesUp
+      end
     end
   end
 end

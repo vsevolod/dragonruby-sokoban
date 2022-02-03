@@ -7,7 +7,8 @@ class Sokoban
         done: 'green'
       }.freeze
 
-      attr_reader :x, :y, :state
+      attr_accessor :x, :y
+      attr_reader :tile, :state
 
       def initialize(x:, y:, state: nil)
         @x, @y = x, y
@@ -20,6 +21,13 @@ class Sokoban
           y: y,
           path: "sprites/square/#{color}.png"
         )
+      end
+
+      def tile=(new_tile)
+        tile.box = nil if tile
+
+        new_tile.box = self
+        @tile = new_tile
       end
 
       private
