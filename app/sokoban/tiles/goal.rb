@@ -1,7 +1,7 @@
 class Sokoban
   module Tiles
-    class Hero
-      attr_accessor :x, :y
+    class Goal
+      attr_reader :x, :y
 
       def initialize(x:, y:)
         @x, @y = x, y
@@ -11,7 +11,7 @@ class Sokoban
         screen.sprite(
           x: x,
           y: y,
-          path: 'sprites/misc/dragon-0.png'
+          path: "sprites/circle/blue.png"
         )
       end
     end
