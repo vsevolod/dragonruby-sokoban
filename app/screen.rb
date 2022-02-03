@@ -21,14 +21,13 @@ class Screen
   end
 
   def sprite(x:, y:, path:)
-    a = {
+    args.outputs.sprites << {
       x: args.grid.left.shift_right(scale_x * x),
       y: args.grid.top.shift_down(scale_y * y),
       w: scale_x - 1,
       h: scale_y - 1,
       path: path
     }
-    args.outputs.sprites << a
   end
 
   def static_solid(x:, y:, r:, g:, b:)

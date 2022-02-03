@@ -29,12 +29,21 @@ class Sokoban
         @tiles.push(line)
 
         row.chars.each do |sym|
+          x = line.size + 1
+          y = @tiles.size
+
           state =
             case sym
             when '*'
               :wall
             when 'h'
-              @hero = Tiles::Hero.new(x: line.size + 1, y: sym.size + 1)
+              @hero = Tiles::Hero.new(x: x, y: y)
+              :empty
+            when 'b'
+              @boxes.push(Tiles::Box.new(x: x, y: y))
+              :empty
+            when 'g'
+              @goals.push(Tiles::Goal.new(x: x, y: y))
               :empty
             when "\n"
               next
@@ -44,10 +53,6 @@ class Sokoban
 
           line.push(Tiles::Tile.new(state))
         end
-        #when 'b'
-        #  @boxes.push(Box.new(x: sym.size, y: line: size)
-        #when 'g'
-        #  @goals.push(Goal.new(x: sym.size, y: line: size)
       end
     end
   end
