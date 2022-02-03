@@ -12,7 +12,6 @@ class Sokoban
 
         game.hero.x = next_x
         game.hero.y = next_y
-        puts "#{game.hero.x}:#{game.hero.y}"
         true
       end
 

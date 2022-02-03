@@ -2,8 +2,8 @@ class Sokoban
   module Tiles
     class Tile
       STATES = %i[empty wall]
-      attr_reader :state
-      attr_accessor :box, :goal
+      attr_reader :state, :box
+      attr_accessor :goal
 
       def initialize(state, box: nil, goal: nil)
         @state = state
@@ -11,6 +11,18 @@ class Sokoban
         box.tile = self if box
 
         @goal = goal
+      end
+
+      def box=(new_box)
+        @box = new_box
+
+        return unless new_box
+
+        if goal
+          new_box.done!
+        else
+          new_box.free!
+        end
       end
 
       def draw(screen, **position)

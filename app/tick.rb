@@ -2,14 +2,19 @@ def tick args
   init(args)
 
   @screen.tick(args)
-  @screen.show_fps
+  # @screen.show_fps
 
-  Sokoban::Events::TickDraw.new(screen: @screen, game: @game).call
+  if @game.finished?
+    Sokoban::Events::FinishDraw.new(screen: @screen).call
+  else
+    Sokoban::Events::TickDraw.new(screen: @screen, game: @game).call
+    Sokoban::Events::TryWin.new(screen: @screen, game: @game).call
 
-  Sokoban::Events::HeroGoesLeft.new(game: @game).call if args.inputs.keyboard.key_down.left
-  Sokoban::Events::HeroGoesRight.new(game: @game).call if args.inputs.keyboard.key_down.right
-  Sokoban::Events::HeroGoesUp.new(game: @game).call if args.inputs.keyboard.key_down.up
-  Sokoban::Events::HeroGoesDown.new(game: @game).call if args.inputs.keyboard.key_down.down
+    Sokoban::Events::HeroGoesLeft.new(game: @game).call if args.inputs.keyboard.key_down.left
+    Sokoban::Events::HeroGoesRight.new(game: @game).call if args.inputs.keyboard.key_down.right
+    Sokoban::Events::HeroGoesUp.new(game: @game).call if args.inputs.keyboard.key_down.up
+    Sokoban::Events::HeroGoesDown.new(game: @game).call if args.inputs.keyboard.key_down.down
+  end
 end
 
 def init(args)

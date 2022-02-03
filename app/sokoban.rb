@@ -2,6 +2,7 @@ class Sokoban < GameTemplate
   ATTRIBUTES = %i[map]
 
   attr_reader :hero, :boxes, :goals
+  attr_accessor :finished
 
   def initialize
     super
@@ -9,6 +10,12 @@ class Sokoban < GameTemplate
     @hero = map.hero
     @boxes = map.boxes
     @goals = map.goals
+
+    @finished = false
+  end
+
+  def finished?
+    finished == true
   end
 
   ATTRIBUTES.each do |key|

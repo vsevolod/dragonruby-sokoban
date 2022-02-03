@@ -20,6 +20,10 @@ class Screen
     args.outputs.labels << [x, y, "FPS: #{args.gtk.current_framerate.round}"]
   end
 
+  def add_label(x:, y:, text:)
+    args.outputs.labels << [x, y, text]
+  end
+
   def sprite(x:, y:, path:)
     args.outputs.sprites << {
       x: args.grid.left.shift_right(scale_x * x),
@@ -28,6 +32,10 @@ class Screen
       h: scale_y - 1,
       path: path
     }
+  end
+
+  def static_solid_clear!
+    args.outputs.static_solids.clear
   end
 
   def static_solid(x:, y:, r:, g:, b:)

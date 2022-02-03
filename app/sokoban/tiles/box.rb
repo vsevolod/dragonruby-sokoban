@@ -3,7 +3,6 @@ class Sokoban
     class Box
       COLORS = {
         free: 'blue',
-        broken: 'black',
         done: 'green'
       }.freeze
 
@@ -15,12 +14,16 @@ class Sokoban
         @state = state || :free
       end
 
-      def draw(screen)
-        screen.sprite(
-          x: x,
-          y: y,
-          path: "sprites/square/#{color}.png"
-        )
+      def free!
+        @state = :free
+      end
+
+      def done!
+        @state = :done
+      end
+
+      def done?
+        @state == :done
       end
 
       def tile=(new_tile)
@@ -28,6 +31,14 @@ class Sokoban
 
         new_tile.box = self
         @tile = new_tile
+      end
+
+      def draw(screen)
+        screen.sprite(
+          x: x,
+          y: y,
+          path: "sprites/square/#{color}.png"
+        )
       end
 
       private
