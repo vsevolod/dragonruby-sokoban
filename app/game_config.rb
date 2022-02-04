@@ -4,7 +4,7 @@ class GameConfig
   def initialize(keys)
     init_attributes(keys)
 
-    yield(attributes) if block_given?
+    yield(self) if block_given?
   end
 
   private
