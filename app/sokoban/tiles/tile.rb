@@ -6,11 +6,10 @@ class Sokoban
       attr_accessor :goal
 
       def initialize(state, box: nil, goal: nil)
+        @goal = goal
         @state = state
         @box = box
         box.tile = self if box
-
-        @goal = goal
       end
 
       def box=(new_box)

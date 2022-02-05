@@ -4,6 +4,7 @@
 # 'h' - hero
 # 'b' - box
 # 'g' - goal
+# 'd' - goal and box
 
 class Sokoban
   class Map
@@ -50,6 +51,14 @@ class Sokoban
               @goals.push(goal)
 
               Tiles::Tile.new(:empty, goal: goal)
+            when 'd'
+              goal = Tiles::Goal.new(x: x, y: y)
+              @goals.push(goal)
+
+              box = Tiles::Box.new(x: x, y: y, state: :done)
+              @boxes.push(box)
+
+              Tiles::Tile.new(:empty, goal: goal, box: box)
             when "\n"
               next
             else

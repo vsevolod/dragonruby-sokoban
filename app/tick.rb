@@ -20,6 +20,9 @@ def tick args
     Sokoban::Events::HeroGoesRight.new(game: @game).call if args.inputs.keyboard.key_down.right
     Sokoban::Events::HeroGoesUp.new(game: @game).call if args.inputs.keyboard.key_down.up
     Sokoban::Events::HeroGoesDown.new(game: @game).call if args.inputs.keyboard.key_down.down
+
+    @initial = nil if args.inputs.keyboard.key_down.r
+    Sokoban::Events::Undo.new(game: @game).call if args.inputs.keyboard.key_down.u
   end
 end
 

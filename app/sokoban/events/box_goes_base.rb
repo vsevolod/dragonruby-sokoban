@@ -1,16 +1,18 @@
 class Sokoban
   module Events
     class BoxGoesBase
-      attr_reader :game, :box
+      attr_reader :game, :box, :reverse
 
-      def initialize(game:, box:)
+      def initialize(game:, box:, reverse: false)
         @game = game
         @box = box
+        @reverse = reverse
       end
 
       def call
         return false unless available?
 
+        game.history.push({box_event: previous_event, box: box}) unless reverse
         box.x = next_x
         box.y = next_y
         box.tile = next_tile

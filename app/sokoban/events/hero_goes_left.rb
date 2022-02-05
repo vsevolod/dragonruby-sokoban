@@ -10,6 +10,10 @@ class Sokoban
       def box_event
         Sokoban::Events::BoxGoesLeft
       end
+
+      def previous_event
+        Sokoban::Events::HeroGoesRight
+      end
     end
   end
 end

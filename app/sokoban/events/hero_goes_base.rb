@@ -1,15 +1,17 @@
 class Sokoban
   module Events
     class HeroGoesBase
-      attr_reader :game
+      attr_reader :game, :reverse
 
-      def initialize(game:)
+      def initialize(game:, reverse: false)
         @game = game
+        @reverse = reverse
       end
 
       def call
         return false unless available?
 
+        push_to_history unless reverse
         game.hero.x = next_x
         game.hero.y = next_y
         true
@@ -41,7 +43,21 @@ class Sokoban
         @next_tile ||= game.map.tiles[next_y - 1][next_x - 1]
       end
 
+      def push_to_history
+        last_turn = game.history.last
+
+        if !last_turn || last_turn.key?(:hero_event)
+          game.history.push({hero_event: previous_event})
+        else
+          last_turn[:hero_event] = previous_event
+        end
+      end
+
       def box_event
+        raise NotImplementedError
+      end
+
+      def previous_event
         raise NotImplementedError
       end
     end

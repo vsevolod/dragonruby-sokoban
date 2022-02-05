@@ -14,6 +14,7 @@ class Screen
   def setup_scale(map)
     @scale_x = (args.grid.w / map.width).floor
     @scale_y = (args.grid.h / map.height).floor
+    @scale_x = @scale_y = [@scale_x, @scale_y].min
   end
 
   def show_fps(x=10, y=710)

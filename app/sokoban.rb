@@ -1,7 +1,7 @@
 class Sokoban < GameTemplate
   ATTRIBUTES = %i[map level]
 
-  attr_reader :hero, :boxes, :goals
+  attr_reader :hero, :boxes, :goals, :history
   attr_accessor :finished
 
   def initialize
@@ -10,6 +10,7 @@ class Sokoban < GameTemplate
     @hero = map.hero
     @boxes = map.boxes
     @goals = map.goals
+    @history = []
 
     @finished = false
   end
