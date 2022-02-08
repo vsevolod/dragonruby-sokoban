@@ -2,7 +2,7 @@ def tick args
   init(args)
 
   @screen.tick(args)
-  # @screen.show_fps
+  @screen.show_hint
 
   if @game.finished?
     Sokoban::Events::FinishDraw.new(screen: @screen, game: @game).call
@@ -22,6 +22,11 @@ def tick args
     Sokoban::Events::HeroGoesDown.new(game: @game).call if args.inputs.keyboard.key_down.down
 
     @initial = nil if args.inputs.keyboard.key_down.r
+    if args.inputs.keyboard.key_down.n
+      @initial = nil
+      @level += 1
+      @screen.static_solid_clear!
+    end
     Sokoban::Events::Undo.new(game: @game).call if args.inputs.keyboard.key_down.u
   end
 end

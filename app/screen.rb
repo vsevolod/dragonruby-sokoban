@@ -17,8 +17,10 @@ class Screen
     @scale_x = @scale_y = [@scale_x, @scale_y].min
   end
 
-  def show_fps(x=10, y=710)
-    args.outputs.labels << [x, y, "FPS: #{args.gtk.current_framerate.round}"]
+  def show_hint(x=10, y=710)
+    args.outputs.labels << [x, y, "r - restart level"]
+    args.outputs.labels << [x, y-18, "u - undo move"]
+    args.outputs.labels << [x, y-36, "n - next level"]
   end
 
   def add_label(x:, y:, text:)
